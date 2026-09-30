@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/imagelite
+    url: jdbc:postgresql://127.0.0.1:5432/imagelite?sslmode=disable
     username: postgres
-    password: postgres
+    password: postgress
 
   jpa:
     database: POSTGRESQL
@@ -15,3 +15,8 @@ spring:
       max-file-size: 30MB
       max-request-size: 30MB
 
+
+  logging:
+    level:
+      org.hibernate.SQL: DEBUG
+      org.hibernate.orm.jdbc.bind: TRACE

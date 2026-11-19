@@ -1,19 +1,33 @@
-# Requisitos Funcionais do Projeto
+# SnapTech
 
-Abaixo estão listados os Requisitos Funcionais (RF) que especificam o comportamento e o funcionamento do sistema.
+Galeria com Next.js e uma API Spring Boot para armazenar e pesquisar imagens.
 
-## Tabela de Requisitos Funcionais
+## Executar
 
-| ID | Descrição |
-| :--- | :--- |
-| **RF01** | O sistema deve permitir que um visitante crie uma conta informando nome, e-mail e senha. |
-| **RF02** | O sistema deve impedir o cadastro de um e-mail já existente. |
-| **RF03** | O sistema deve permitir que um usuário cadastrado se autentique com e-mail e senha. |
-| **RF04** | O sistema deve emitir um token de acesso (JWT) após autenticação bem-sucedida. |
-| **RF05** | O sistema deve permitir que o usuário autenticado encerre sua sessão. |
-| **RF06** | O sistema deve permitir que o usuário autenticado publique uma nova imagem, informando nome, tags e arquivo. |
-| **RF07** | O sistema deve validar o formato (PNG, JPEG, GIF) e o tamanho do arquivo antes do envio. |
-| **RF08** | O sistema deve permitir que o usuário pesquise imagens por nome, por tag e/ou por extensão. |
-| **RF09** | O sistema deve exibir as imagens encontradas em formato de galeria, com nome, extensão, tamanho e data de upload. |
-| **RF10** | O sistema deve permitir a visualização da imagem em tamanho real a partir da miniatura. |
-| **RF11** | O sistema deve notificar o usuário sobre sucesso ou falha de cada operação realizada. |
+Requisitos: Node.js, JDK 25 e Docker Desktop com o mecanismo iniciado.
+
+1. Na pasta `BackEnd`, execute `docker compose up -d db` e `./mvnw.cmd spring-boot:run`.
+2. Em outro terminal, na pasta `Frontend`, execute `npm ci` e `npm run dev`.
+3. Acesse http://localhost:3000. A página inicial leva à galeria.
+
+A API fica em http://localhost:8080/v1/images. O banco usa `postgres` como usuário e senha, conforme o Compose. Se o banco local usar outra senha, defina `DB_PASSWORD` antes de iniciar a API. O diretório de dados depende do volume configurado no Compose; os dados existentes não foram movidos nem apagados.
+
+Para outra URL da API, defina `NEXT_PUBLIC_API_URL` no frontend antes de iniciar ou compilar.
+
+## Roteiros 14 e 15
+
+- Pesquisa por trecho do nome ou tags, combinada com PNG, JPEG ou GIF; todos os formatos com filtro vazio.
+- Cards com extensão, tamanho em KB/MB/GB e data brasileira.
+- Download ao clicar na imagem, preservando o nome e a extensão em minúsculas. A miniatura continua disponível para exibição inline.
+- Indicador de carregamento, animação, estado sem resultados e tratamento de falha.
+- `RenderIf` e `Template` com `loading` opcional e padrão `false`.
+- Navegação entre galeria e formulário. O formulário inclui envio de imagem e validação de formato e limite de 30 MB.
+- Compatibilidade do filtro JPEG com os registros antigos armazenados como JPG.
+
+O frontend usa Webpack nos scripts porque o Turbopack apresentou falha interna de processo neste ambiente Windows.
+
+## Validação
+
+No frontend: `npm run lint` e `npm run build`.
+
+No backend: `./mvnw.cmd test`. Os testes usam H2 em memória e não acessam o PostgreSQL local. Cobrem upload, filtros combinados, busca por tag, data brasileira, conteúdo e cabeçalhos do download, CORS, formato inválido e imagem inexistente.

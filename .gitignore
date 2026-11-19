@@ -1,37 +1,12 @@
-HELP.md
-target/
-.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
-
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
-
-### IntelliJ IDEA ###
-.idea
-*.iws
-*.iml
-*.ipr
-
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
-
-### VS Code ###
+**/node_modules/
+**/.next/
+**/target/
+**/data/
+**/data2/
+**/.env*
+!**/.env.example
+**/hs_err_pid*.log
+**/replay_pid*.log
+**/*.tsbuildinfo
+.idea/
 .vscode/
-
-### PASTA DO BANCO DE DADOS ###
-/data2
-/data

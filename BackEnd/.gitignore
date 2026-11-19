@@ -1,0 +1,12 @@
+**/node_modules/
+**/.next/
+**/target/
+**/data/
+**/data2/
+**/.env*
+!**/.env.example
+**/hs_err_pid*.log
+**/replay_pid*.log
+**/*.tsbuildinfo
+.idea/
+.vscode/
